@@ -21,7 +21,7 @@ opt.incsearch = true
 opt.scrolloff = 8
 
 opt.updatetime = 50
-opt.colorcolumn = "100"
+opt.colorcolumn = "120"
 
 opt.shell = "pwsh.exe"
 opt.shellxquote = ""
