@@ -1,7 +1,7 @@
- return {
+return {
   "OmniSharp/omnisharp-vim",
   init = function()
-    require("lazyvim.util").on_attach(function(client, _)
+    require("lazyvim.util").lsp.on_attach(function(client, _)
       if client.name == "omnisharp" then
         client.server_capabilities.semanticTokensProvider = {
           full = vim.empty_dict(),
