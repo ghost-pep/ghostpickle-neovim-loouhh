@@ -14,3 +14,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   desc = "Change comment string for csharp files",
 })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
+  end,
+  desc = "Highlight yanked text",
+})

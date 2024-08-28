@@ -1,7 +1,9 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
 if vim.g.vscode then
-    -- VSCode extension
+    require("config.options")
+    require("config.plainautocmds")
 else
-    -- ordinary Neovim
+    require("config.globals")
+    require("config.options")
+    require("config.plainautocmds")
     require("config.lazy")
 end
