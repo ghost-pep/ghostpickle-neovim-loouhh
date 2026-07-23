@@ -13,7 +13,4 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
-map("n", "<F5>", "<cmd>lua require'dap'.continue()", { desc = "Launch Debugger" })
-map("n", "<F10>", "<cmd>lua require'dap'.step_over()", { desc = "Step Over" })
-map("n", "<F11>", "<cmd>lua require'dap'.step_into()", { desc = "Step Into" })
-map("n", "<F12>", "<cmd>lua require'dap'.step_out()", { desc = "Step Out" })
+-- DAP removed when trimming config. Add your own keymaps here.
