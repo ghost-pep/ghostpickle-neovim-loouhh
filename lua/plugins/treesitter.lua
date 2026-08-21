@@ -16,6 +16,7 @@ return {
             vim.list_extend(opts.ensure_installed, {
                 "markdown",
                 "markdown_inline",
+                "bicep",
                 "cpp",
                 "c_sharp",
                 "rust",
@@ -31,6 +32,9 @@ return {
 
             -- Rust: ```rust already works; add the short ```rs.
             register("rust", { "rs" })
+
+            -- Use the Bicep parser for both templates and parameter files.
+            register("bicep", { "bicep", "bicep-params" })
 
             -- IDL (MIDL3): no dedicated tree-sitter grammar exists. MIDL3 is
             -- intentionally C#-shaped (namespace / runtimeclass / interface /

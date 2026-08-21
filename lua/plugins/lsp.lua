@@ -1,4 +1,30 @@
 -- Add LSP servers for languages that don't have a dedicated LazyVim extra.
+local function bicep_lsp_cmd()
+    local home = vim.fn.expand("$HOME")
+    local candidates = {}
+    for _, root in ipairs({ ".vscode", ".vscode-insiders" }) do
+        local pattern = table.concat({
+            home,
+            root,
+            "extensions",
+            "ms-azuretools.vscode-bicep-*",
+            "bicepLanguageServer",
+            "Bicep.LangServer.exe",
+        }, "/")
+        vim.list_extend(candidates, vim.fn.glob(pattern, false, true))
+    end
+
+    table.sort(candidates, function(left, right)
+        local left_stat = vim.uv.fs_stat(left)
+        local right_stat = vim.uv.fs_stat(right)
+        local left_mtime = left_stat and left_stat.mtime.sec or 0
+        local right_mtime = right_stat and right_stat.mtime.sec or 0
+        return left_mtime == right_mtime and left < right or left_mtime < right_mtime
+    end)
+
+    return { candidates[#candidates] or "bicep-lsp" }
+end
+
 return {
     {
         "neovim/nvim-lspconfig",
@@ -6,6 +32,11 @@ return {
             servers = {
                 bashls = {
                     filetypes = { "sh", "bash", "zsh" },
+                },
+                -- `up` installs the VS Code Bicep extension that ships this server.
+                bicep = {
+                    cmd = bicep_lsp_cmd(),
+                    mason = false,
                 },
                 powershell_es = {
                     filetypes = { "ps1", "psm1", "psd1" },
